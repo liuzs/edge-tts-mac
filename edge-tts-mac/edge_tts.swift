@@ -8,9 +8,10 @@
 import Foundation
 
 class MP3Generator {
-    func generateMP3(from text: String, to path: URL, completion: @escaping (Bool, String) -> Void) {
+    func generateMP3(from text: String, to path: URL, voice: String, rate: String, pitch: String,completion: @escaping (Bool, String) -> Void) {
         DispatchQueue.global().async {
             let process = Process()
+            
             // 使用 Bundle 查找 edge-tts 文件路径
             guard let edgeTTSPath = Bundle.main.path(forResource: "edge-tts", ofType: "") else {
                 DispatchQueue.main.async {
@@ -18,10 +19,17 @@ class MP3Generator {
                 }
                 return
             }
+            
+            // 设置可执行文件路径
             process.executableURL = URL(fileURLWithPath: edgeTTSPath)
+            
+            // 设置命令行参数，添加 --voice 和 --rate
             process.arguments = [
                 "--text", text,
-                "--write-media", path.path
+                "--write-media", path.path,
+                "--voice", voice,
+                "--rate", rate,
+                "--pitch",pitch
             ]
 
             do {

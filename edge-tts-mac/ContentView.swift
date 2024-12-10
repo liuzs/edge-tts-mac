@@ -18,46 +18,51 @@ struct ContentView: View {
     @State private var progress: Double = 0.0
     private let generator = MP3Generator() // 实例化 MP3Generator 类
     var body: some View {
-        VStack(alignment: .leading, spacing: 23.0) {
-            // 标题
-            Text("请输入文字")
-                .font(.headline)
-                .padding()
-            // 多行输入框
-            TextEditor(text: $inputText)
-                .frame(minHeight: 300) // 设置高度，可以调节大小
-                .cornerRadius(8) // 圆角
-                .padding(.horizontal) // 左右边距
-            
-            // 进度条只在生成中时显示
-            if isGenerating {
-                ProgressView(value: progress, total: 100)
-                    .progressViewStyle(LinearProgressViewStyle())
-                    .frame(width: 300, height: 10)
+        HStack {
+            VStack(alignment: .leading, spacing: 23.0) {
+                // 标题
+                Text("请输入文字")
+                    .font(.headline)
+                    .padding()
+                // 多行输入框
+                TextEditor(text: $inputText)
+                    .frame(minHeight: 300) // 设置高度，可以调节大小
+                    .cornerRadius(8) // 圆角
+                    .padding(.horizontal) // 左右边距
+                
+                // 进度条只在生成中时显示
+                if isGenerating {
+                    ProgressView(value: progress, total: 100)
+                        .progressViewStyle(LinearProgressViewStyle())
+                        .frame(width: 300, height: 10)
+                        .padding()
+                }
+                // 按钮：生成MP3
+                Button(action: {
+                    showSavePanel()
+                }) {
+                    Text(isGenerating ? "生成中..." : "生成语音")
+                        .fontWeight(.bold)
+                        .padding(.all)
+                }
+                .disabled(isGenerating) // 生成中禁用按钮
+                .buttonStyle(.automatic)
+                .padding(.horizontal)
+                
+                Spacer() // 占位符，将内容推向顶部
+                
+                // 状态栏显示
+                Text(statusMessage)
+                    .font(.subheadline)
+                    .foregroundColor(.blue)
                     .padding()
             }
-            // 按钮：生成MP3
-            Button(action: {
-                showSavePanel()
-            }) {
-                Text(isGenerating ? "生成中..." : "生成语音")
-                    .fontWeight(.bold)
-                    .padding(.all)
+            VStack(alignment: .leading, spacing: 20) {
+                Text("控制选项")
+                    .font(.headline)
             }
-            .disabled(isGenerating) // 生成中禁用按钮
-            .buttonStyle(.automatic)
-            .padding(.horizontal)
-            
-            Spacer() // 占位符，将内容推向顶部
-            
-            // 状态栏显示
-            Text(statusMessage)
-                .font(.subheadline)
-                .foregroundColor(.blue)
-                .padding()
-
-        }
-        .padding() // 为整个界面添加内边距
+            .padding()
+        } // 为整个界面添加内边距
     }
 
 
@@ -80,6 +85,9 @@ struct ContentView: View {
     
     func generateMP3() {
         guard let path = savePath else { return }
+        let voice = "zh-CN-XiaoxiaoNeural"
+        let rate = "+0%"
+        let pitch = "+0Hz"
         isGenerating = true
         progress = 0.0
         statusMessage = "正在生成 MP3 文件..."
@@ -98,7 +106,7 @@ struct ContentView: View {
         }
 
         // 执行实际的生成任务
-        generator.generateMP3(from: inputText, to: path) { success, message in
+        generator.generateMP3(from: inputText, to: path, voice: voice, rate: rate,pitch: pitch) { success, message in
             DispatchQueue.main.async {
                 timer?.invalidate()       // 任务完成时停止进度模拟
                 progress = 100.0          // 直接设置进度条到 100%
