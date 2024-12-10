@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2DDB862B2D08558C00E7F7A7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2DDB862A2D08558100E7F7A7 /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		2DB747072D07FF5A00C5211A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		2DB746F52D07FF5700C5211A /* edge-tts-mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "edge-tts-mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DB747062D07FF5A00C5211A /* edge-tts-macTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "edge-tts-macTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DB747102D07FF5A00C5211A /* edge-tts-macUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "edge-tts-macUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2DDB862A2D08558100E7F7A7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +80,7 @@
 		2DB746EC2D07FF5700C5211A = {
 			isa = PBXGroup;
 			children = (
+				2DDB862A2D08558100E7F7A7 /* README.md */,
 				2DB746F72D07FF5700C5211A /* edge-tts-mac */,
 				2DB747092D07FF5A00C5211A /* edge-tts-macTests */,
 				2DB747132D07FF5A00C5211A /* edge-tts-macUITests */,
@@ -212,6 +218,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DDB862B2D08558C00E7F7A7 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
