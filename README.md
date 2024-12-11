@@ -1,5 +1,8 @@
 edge-tts的macOS GUI
 
+## 预览图
+
+![预览图](preview.png)
 ### 使用的第三方组件
 
 本项目使用了 [edge-tts](https://github.com/rany2/edge-tts)，该组件基于 **LGPL-3.0** 授权。  
