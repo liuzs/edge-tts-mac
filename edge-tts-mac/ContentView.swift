@@ -221,12 +221,18 @@ struct ContentView: View {
         statusMessage = "正在生成 MP3 文件..."
 
         let progressUpdateInterval = 0.1 // 进度更新的时间间隔
-        let progressIncrement = 1.0      // 每次增加的进度量
-        
-        // 模拟进度平滑增加
         var timer: Timer? = nil
+
+        let wordCount = inputText.count // 获取文本字数
+        let timePer10Words = 0.5 // 每10个字用时 0.5 秒
+        let totalDuration = Double(wordCount) / 10.0 * timePer10Words // 根据字数计算总时长
+        let totalUpdates = totalDuration / progressUpdateInterval // 总更新次数
+        let progressIncrement = 95.0 / totalUpdates // 每次增加的进度量（最大95%）
+
+        progress = 0.0 // 重置进度条
+
         timer = Timer.scheduledTimer(withTimeInterval: progressUpdateInterval, repeats: true) { _ in
-            if progress < 95.0 {  // 最大进度为 95%
+            if progress < 95.0 { // 最大进度为 95%
                 progress += progressIncrement
             } else {
                 timer?.invalidate() // 停止计时器
