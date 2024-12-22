@@ -1,5 +1,6 @@
+# edge-tts-mac
 edge-tts的macOS GUI
-
+没有开发者账号无法打包发布，有需要可以自行clone编译。
 ## 预览图
 
 ![预览图](preview.png)
